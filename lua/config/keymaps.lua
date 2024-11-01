@@ -1,6 +1,6 @@
 -- local opts = { noremap = true, silent = true }
--- local term_opts = { silent = true }
 -- local builtin = require('telescope.builtin')
+-- local term_opts = { silent = true }
 --
 -- -- Shorten function name
 -- local keymap = vim.api.nvim_set_keymap
@@ -22,18 +22,15 @@ map("n", "vs", ":vs<CR>")
 
 -- Press jk fast to exit insert mode 
 map("i", "jk", "<ESC>")
-map("i", "kj", "<ESC>")
 
 -- Terminal
+map("t", "<Esc>", "<C-\\><C-n>")
+map("t", "jk", "<C-\\><C-n>")
 map("n", "<leader>v", ":vs +terminal | startinsert<CR>")
 map("n", "<leader>h", ":split +terminal | startinsert<CR>")
 
 -- Better paste
 map("v", "p", '"_dP')
-
--- Move text up and down
-map("x", "J", ":move '>+1<CR>gv-gv")
-map("x", "K", ":move '<-2<CR>gv-gv")
 
 -- Comment
 map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)")
@@ -59,11 +56,22 @@ map("n", "hs", ":split<CR>")
 map("n", "vs", ":vs<CR>")
 
 -- Explore
-map("n", "C-N", ":Sex<CR>")
+-- map("n", "<leader>e", ":Sex<CR>")
+map("n", "<leader>e", ":tabnew | Explore<CR>")
 
 -- Telescope keybinds
 map('n', 'ff', ":Telescope find_files<CR>")
 map('n', 'fg', ":Telescope live_grep<CR>")
 map('n', 'fb', ":Telescope buffers<CR>")
 map('n', 'fh', ":Telescope help_tags<CR>")
+
+-- Move lines around
+map('n', '<A-j>', ":m .+1<CR>==")
+map('n', '<A-k>', ":m .-2<CR>==")
+map('i', '<A-j>', ":m .+1<CR>==gi")
+map('i', '<A-k>', ":m .-2<CR>==gi")
+map('v', '<A-j>', ":m '>+1<CR>gv=gv")
+map('v', '<A-k>', ":m '<-2<CR>gv=gv")
+map("x", "J", ":move '>+1<CR>gv-gv")
+map("x", "K", ":move '<-2<CR>gv-gv")
 
