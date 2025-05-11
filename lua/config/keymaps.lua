@@ -32,10 +32,6 @@ map("n", "<leader>h", ":split +terminal | startinsert<CR>")
 -- Better paste
 map("v", "p", '"_dP')
 
--- Comment
-map("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)")
-map("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)")
-
 -- Move between tabs
 map("n", "<leader>1", "1gt")
 map("n", "<leader>2", "2gt")
@@ -57,7 +53,7 @@ map("n", "vs", ":vs<CR>")
 
 -- Explore
 -- map("n", "<leader>e", ":Sex<CR>")
-map("n", "<leader>e", ":tabnew | Explore<CR>")
+map("n", "<leader>e", ":tabnew | Oil<CR>")
 
 -- Telescope keybinds
 map('n', 'ff', ":Telescope find_files<CR>")
@@ -72,6 +68,6 @@ map('i', '<A-j>', ":m .+1<CR>==gi")
 map('i', '<A-k>', ":m .-2<CR>==gi")
 map('v', '<A-j>', ":m '>+1<CR>gv=gv")
 map('v', '<A-k>', ":m '<-2<CR>gv=gv")
-map("x", "J", ":move '>+1<CR>gv-gv")
 map("x", "K", ":move '<-2<CR>gv-gv")
+map("x", "J", ":move '>+1<CR>gv-gv")
 

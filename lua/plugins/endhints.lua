@@ -9,6 +9,7 @@ return {
 			unknown = " ", -- hint kind is nil
 		},
 		label = {
+			truncateAtChars = 60,
 			padding = 1,
 			marginLeft = 0,
 			bracketedParameters = true,

@@ -2,6 +2,36 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			local lspconfig = require("lspconfig")
+
+			-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+			local servers = {
+				"bashls",          -- Bash
+				"clangd",          -- C/C++
+				"gopls",           -- Go
+				"pyright",         -- Python
+				"rust_analyzer",   -- Rust
+				"gleam", 		   -- Gleam
+                "ocamllsp",        -- Ocaml
+			}
+
+			local lsp_flags = {
+				-- This is the default in Nvim 0.7+
+				debounce_text_changes = 150,
+			}
+
+			-- Add additional capabilities supported by nvim-cmp
+			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			for _, lsp in ipairs(servers) do
+				lspconfig[lsp].setup({
+					on_attach = on_attach,
+					flags = lsp_flags,
+					single_file_support = true,
+					capabilities = capabilities,
+				})
+			end
+
+
 			-- Global mappings.
 			-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 			vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -39,40 +69,6 @@ return {
 					end, opts)
 				end,
 			})
-
-			local lspconfig = require("lspconfig")
-
-			-- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-			local servers = {
-				"bashls",          -- Bash
-				"clangd",          -- C/C++
-				"gopls",           -- Go
-				"pyright",         -- Python
-				-- "ruff",            -- Python linter
-				"rust_analyzer",   -- Rust
-			}
-
-			local lsp_flags = {
-				-- This is the default in Nvim 0.7+
-				debounce_text_changes = 150,
-			}
-
-			-- Add additional capabilities supported by nvim-cmp
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup({
-					on_attach = on_attach,
-					flags = lsp_flags,
-					single_file_support = true,
-					capabilities = capabilities,
-				})
-			end
 		end
 	},
-	-- Rust LSP
-	-- {
-	-- 	'mrcjkb/rustaceanvim',
-		-- ft = { 'rust' },
-	-- },
 }
